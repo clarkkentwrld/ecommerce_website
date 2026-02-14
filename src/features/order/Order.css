@@ -1,0 +1,124 @@
+/* GLOBAL CONTAINER */
+.order-container {
+  min-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9; /* Matches Hero background */
+  padding: 2rem;
+  font-family: 'Inter', sans-serif;
+}
+
+/* CARD STYLING */
+.order-card {
+  background: white;
+  width: 100%;
+  max-width: 500px;
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  border: 1px solid #eee;
+  text-align: center;
+}
+
+/* HEADER */
+.order-header h1 {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 2rem;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+}
+
+.order-header p {
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+/* SUMMARY DETAILS */
+.summary-details {
+  margin-bottom: 2.5rem;
+  text-align: left; /* Align text naturally */
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.summary-row .label {
+  font-weight: 500;
+}
+
+.summary-row .value {
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.summary-row .value.free {
+  color: #2ecc71; /* Brand Green for positive value */
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+.divider {
+  height: 1px;
+  background-color: #eee;
+  margin: 1.5rem 0;
+}
+
+.total-row {
+  margin-top: 1rem;
+}
+
+.total-row .label {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.total-row .value {
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+/* BUTTONS */
+.checkout-btn {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  background-color: #1a1a1a;
+  color: white;
+  border: none;
+  border-radius: 50px; /* Pill shape consistency */
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.checkout-btn:hover {
+  background-color: #2ecc71;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: #888;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: color 0.2s;
+  text-decoration: underline;
+}
+
+.back-btn:hover {
+  color: #1a1a1a;
+}

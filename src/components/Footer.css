@@ -1,0 +1,180 @@
+/* FOOTER CONTAINER */
+.site-footer {
+  background-color: #111; /* Dark background like Nike */
+  color: #fff;
+  padding: 4rem 5% 2rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+}
+
+.footer-content {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* --- TOP GRID --- */
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr; /* Custom column widths */
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.footer-heading {
+  font-family: var(--font-heading, sans-serif); /* Use your custom font */
+  font-size: 1rem;
+  font-weight: 800;
+  margin-bottom: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: white;
+}
+
+.brand-col .footer-heading {
+  font-size: 1.5rem; /* Larger Brand Name */
+  color: #2ecc71; /* Brand Accent Color */
+}
+
+/* LINKS STYLING */
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.8rem;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #7e7e7e; /* Muted text color */
+  transition: color 0.2s;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: white; /* Brighten on hover */
+}
+
+/* PRIMARY LINKS (Find a Store, etc.) */
+.primary-link {
+  color: white !important; /* Force white */
+  font-weight: 800 !important;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+/* SOCIAL ICONS */
+.social-col {
+  display: flex;
+  justify-content: flex-end; /* Push to right */
+}
+
+.social-icons {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-icon {
+  width: 36px;
+  height: 36px;
+  background-color: #7e7e7e;
+  color: #111;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: all 0.2s;
+}
+
+.social-icon:hover {
+  background-color: white;
+  transform: translateY(-2px);
+}
+
+/* --- BOTTOM SECTION --- */
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-top: 1px solid #333;
+  padding-top: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.copyright {
+  display: flex;
+  gap: 1.5rem;
+  color: #7e7e7e;
+  font-size: 0.75rem;
+}
+
+.location {
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.location::before {
+  content: "📍"; /* Or use an icon */
+  filter: grayscale(1);
+}
+
+.legal-links {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.legal-links a {
+  text-decoration: none;
+  color: #7e7e7e;
+  font-size: 0.75rem;
+  transition: color 0.2s;
+}
+
+.legal-links a:hover {
+  color: white;
+}
+
+/* RESPONSIVE */
+@media (max-width: 968px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr; /* 2 columns on tablet */
+  }
+  
+  .social-col {
+    justify-content: flex-start; /* Left align on mobile */
+    grid-column: span 2; /* Take full width */
+  }
+}
+
+@media (max-width: 500px) {
+  .footer-grid {
+    grid-template-columns: 1fr; /* 1 column on mobile */
+  }
+  
+  .social-col {
+    grid-column: span 1;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .legal-links {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+}

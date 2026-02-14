@@ -1,0 +1,262 @@
+/* CONTAINER */
+.plans-container {
+  padding: 2rem 5% 6rem;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  color: #1a1a1a;
+}
+
+/* HEADER */
+.plans-header-section {
+  text-align: center;
+  margin-bottom: 3rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.plans-header-section h1 {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  letter-spacing: -1px;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* --- PLANS LIST --- */
+.plans-list {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  /* Removed animation properties */
+}
+
+/* --- PLAN ROW CONTENT --- */
+.plan-row {
+  background: white;
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+  border: 1px solid #eaeaea;
+  /* Removed opacity/transform initial state */
+}
+
+/* ROW HEADER */
+.plan-row-header {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 1.5rem;
+}
+
+.plan-title-group h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0.5rem 0 0 0;
+}
+
+.plan-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background-color: #f0fdf4;
+  color: #2ecc71;
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+
+.plan-row-desc {
+  max-width: 500px;
+  color: #555;
+  line-height: 1.5;
+  font-size: 1rem;
+  text-align: right;
+}
+
+/* --- TIERS GRID --- */
+.tiers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* TIER CARD */
+.tier-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+  transition: all 0.2s ease;
+  background-color: #fff;
+}
+
+.tier-card:hover {
+  border-color: #2ecc71;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.05);
+}
+
+/* Best Value Highlight */
+.tier-card.best-value {
+  background-color: #f8fff9;
+  border-color: #c0ebcc;
+}
+
+.value-tag {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #2ecc71;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+.tier-header h4 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  color: #333;
+}
+
+.meal-count {
+  display: block;
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 1.5rem;
+}
+
+.tier-pricing {
+  margin-bottom: 2rem;
+}
+
+.price {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #1a1a1a;
+}
+
+.per-week {
+  font-size: 0.9rem;
+  color: #888;
+  margin-left: 4px;
+}
+
+.per-meal-sub {
+  font-size: 0.85rem;
+  color: #2ecc71;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+/* BUTTONS */
+.select-tier-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.btn-primary {
+  background-color: #1a1a1a;
+  color: white;
+  border: 1px solid #1a1a1a;
+}
+
+.btn-primary:hover {
+  background-color: #2ecc71;
+  border-color: #2ecc71;
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: #1a1a1a;
+  border: 1px solid #ccc;
+}
+
+.btn-outline:hover {
+  border-color: #1a1a1a;
+  background-color: #f9f9f9;
+}
+
+/* --- CUSTOM PLAN SECTION --- */
+.custom-plan-section {
+  background-color: #1a1a1a;
+  color: white;
+  border-radius: 16px;
+  padding: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 2rem;
+  /* Removed animation props */
+}
+
+.custom-content h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.custom-content p {
+  color: #ccc;
+}
+
+.custom-plan-btn {
+  background-color: white;
+  color: #1a1a1a;
+  padding: 15px 30px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: transform 0.2s;
+}
+
+.custom-plan-btn:hover {
+  transform: scale(1.05);
+  background-color: #2ecc71;
+  color: white;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .plan-row-header {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+  
+  .plan-row-desc {
+    text-align: left;
+  }
+  
+  .custom-plan-section {
+    flex-direction: column;
+    text-align: center;
+  }
+}
