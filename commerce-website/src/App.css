@@ -1,0 +1,102 @@
+/* HERO SECTION CONTAINER */
+.hero-section {
+  display: flex;
+  min-height: 90vh; /* Takes up most of the screen */
+  background-color: var(--off-white);
+  overflow: hidden; /* Prevents scrollbars if image is huge */
+}
+
+/* LEFT SIDE: CONTENT */
+.hero-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 0 0 8%; /* Left padding only */
+  max-width: 650px; 
+  z-index: 2; /* Ensures text sits 'above' if elements overlap */
+}
+
+.hero-content h1 {
+  font-size: 4rem; 
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  color: var(--primary-black);
+}
+
+.hero-heading-accent {
+  color: var(--accent-green); /* Highlights "Fuel Right" */
+}
+
+.hero-content p {
+  font-size: 1.25rem;
+  color: #555;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+  max-width: 480px;
+}
+
+/* RIGHT SIDE: IMAGE CONTAINER */
+.hero-image-container {
+  flex: 1.2; /* Gives image slightly more space than text */
+  
+  /* IMPORTANT: Background image is set in App.jsx! */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  /* Styling to make it look like a "Card" or "Window" */
+  margin: 20px;
+  border-radius: 30px; /* Rounded corners */
+  box-shadow: -10px 10px 30px rgba(0,0,0,0.1); /* Soft shadow */
+}
+
+/* CALL TO ACTION BUTTON */
+.primary-btn {
+  display: inline-block;
+  padding: 18px 48px;
+  background-color: var(--primary-black);
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  width: fit-content;
+}
+
+.primary-btn:hover {
+  background-color: var(--accent-green);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(46, 204, 113, 0.3);
+  color: white;
+}
+
+/* MOBILE RESPONSIVENESS */
+@media (max-width: 968px) {
+  .hero-section {
+    flex-direction: column-reverse; /* Puts image on top on mobile */
+    min-height: auto;
+    padding-bottom: 3rem;
+  }
+
+  .hero-image-container {
+    width: 100%;
+    height: 350px; /* Fixed height for mobile */
+    margin: 0;
+    border-radius: 0 0 30px 30px; /* Only round bottom corners */
+    flex: none;
+  }
+
+  .hero-content {
+    padding: 3rem 5%;
+    text-align: center;
+    align-items: center;
+  }
+
+  .hero-content h1 {
+    font-size: 2.8rem;
+  }
+}
