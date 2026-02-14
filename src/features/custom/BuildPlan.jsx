@@ -2,34 +2,36 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './BuildPlan.css';
 
-// Import the few images you have (we will cycle them or use placeholders)
+// Importing images for the Calorie-Controlled diet
 import meal1 from '../../assets/Meal (1).jpg';
 import meal2 from '../../assets/Meal (2).jpg';
 import meal3 from '../../assets/Meal (3).jpg';
 import meal4 from '../../assets/Meal (4).jpg';
 import meal5 from '../../assets/Meal (5).jpg';
+import meal6 from '../../assets/Meal (6).jpg';
+import meal7 from '../../assets/Meal (7).jpg';
+import meal8 from '../../assets/Meal (8).jpg';
+import meal9 from '../../assets/Meal (9).jpg';
 
 const BuildPlan = () => {
   const navigate = useNavigate();
   const [activeCategory, setActiveCategory] = useState("Calorie-Controlled");
   const [selections, setSelections] = useState({});
 
-  // FULL MENU DATA: 6 Categories x 10 Items = 60 Meals
-  // Note: 'img' is set to null for most to demonstrate the placeholder logic
+  // FULL MENU DATA: 6 Categories x 9 Items = 54 Meals
   const menuDatabase = [
-    // --- 1. CALORIE-CONTROLLED ---
+    // --- 1. CALORIE-CONTROLLED (Real Images) ---
     { id: 101, category: "Calorie-Controlled", name: "The Classic Slim", desc: "Skinless Chicken Longganisa, Brown Rice", price: 150, cal: 400, img: meal1 },
     { id: 102, category: "Calorie-Controlled", name: "Fish & Fowl", desc: "Spanish Style Bangus, Scrambled Egg", price: 160, cal: 420, img: meal2 },
     { id: 103, category: "Calorie-Controlled", name: "Egg & Veg", desc: "Tortang Dulong (Fish Omelet)", price: 140, cal: 380, img: meal3 },
     { id: 104, category: "Calorie-Controlled", name: "The Roast", desc: "Roast Chicken, Pumpkin Side", price: 155, cal: 410, img: meal4 },
     { id: 105, category: "Calorie-Controlled", name: "Vinegar Preservation", desc: "Daing na Bangus, Atchara", price: 165, cal: 430, img: meal5 },
-    { id: 106, category: "Calorie-Controlled", name: "Spicy Kick", desc: "Bicol Express (Lean, No Cream)", price: 170, cal: 450, img: null },
-    { id: 107, category: "Calorie-Controlled", name: "Light Pasta", desc: "Tuna Pesto Pasta (Oil-based)", price: 160, cal: 440, img: null },
-    { id: 108, category: "Calorie-Controlled", name: "Savory Staples", desc: "Beef Giniling with Raisins", price: 175, cal: 460, img: null },
-    { id: 109, category: "Calorie-Controlled", name: "Simple Sauté", desc: "Stir-Fried Sayote, Chicken Strips", price: 145, cal: 390, img: null },
-    { id: 110, category: "Calorie-Controlled", name: "Mushroom Lovers", desc: "Burger Steak, Mushroom Gravy", price: 180, cal: 470, img: null },
+    { id: 106, category: "Calorie-Controlled", name: "Spicy Kick", desc: "Bicol Express (Lean, No Cream)", price: 170, cal: 450, img: meal6 },
+    { id: 107, category: "Calorie-Controlled", name: "Light Pasta", desc: "Tuna Pesto Pasta (Oil-based)", price: 160, cal: 440, img: meal7 },
+    { id: 108, category: "Calorie-Controlled", name: "Savory Staples", desc: "Beef Giniling with Raisins", price: 175, cal: 460, img: meal8 },
+    { id: 109, category: "Calorie-Controlled", name: "Simple Sauté", desc: "Stir-Fried Sayote, Chicken Strips", price: 145, cal: 390, img: meal9 },
 
-    // --- 2. HIGH-PROTEIN ---
+    // --- 2. HIGH-PROTEIN (Placeholders) ---
     { id: 201, category: "High-Protein", name: "The Power Silog", desc: "Beef Tapa (Sirloin), Egg, Garlic Adlai", price: 190, cal: 600, img: null },
     { id: 202, category: "High-Protein", name: "Pork Power", desc: "Pork Menudo (Meat Chunks & Liver)", price: 185, cal: 620, img: null },
     { id: 203, category: "High-Protein", name: "Sausage Fest", desc: "Hungarian Sausage, Mashed Potato", price: 200, cal: 650, img: null },
@@ -39,9 +41,8 @@ const BuildPlan = () => {
     { id: 207, category: "High-Protein", name: "The Grind", desc: "Picadillo, Quail Eggs", price: 180, cal: 610, img: null },
     { id: 208, category: "High-Protein", name: "Spicy Protein", desc: "Buffalo Chicken Tenders (Baked)", price: 195, cal: 630, img: null },
     { id: 209, category: "High-Protein", name: "Adobo Loading", desc: "Pork Belly Adobo, Boiled Egg", price: 185, cal: 640, img: null },
-    { id: 210, category: "High-Protein", name: "Clean Bulk", desc: "Roast Beef, Mushroom Gravy", price: 230, cal: 550, img: null },
 
-    // --- 3. LOW CARB ---
+    // --- 3. LOW CARB (Placeholders) ---
     { id: 301, category: "Low Carb", name: "Daily Low Carb", desc: "Skinless Longganisa, Egg, Atchara", price: 160, cal: 350, img: null },
     { id: 302, category: "Low Carb", name: "Beef & Broccoli", desc: "Beef Stir Fry, Broccoli (No Rice)", price: 180, cal: 380, img: null },
     { id: 303, category: "Low Carb", name: "Fish Day", desc: "Steamed Fish, Bok Choy", price: 170, cal: 320, img: null },
@@ -51,9 +52,8 @@ const BuildPlan = () => {
     { id: 307, category: "Low Carb", name: "Eggplant Special", desc: "Tortang Talong (Stuffed)", price: 150, cal: 330, img: null },
     { id: 308, category: "Low Carb", name: "Noodle Swap", desc: "Shirataki Pancit Bihon", price: 190, cal: 310, img: null },
     { id: 309, category: "Low Carb", name: "Simple Grill", desc: "Grilled Liempo, Steamed Okra", price: 185, cal: 420, img: null },
-    { id: 310, category: "Low Carb", name: "Seafood Light", desc: "Shrimp Gambas, Cauliflower Rice", price: 200, cal: 370, img: null },
 
-    // --- 4. KETOGENIC ---
+    // --- 4. KETOGENIC (Placeholders) ---
     { id: 401, category: "Ketogenic", name: "Pork Belly Feast", desc: "Lechon Kawali, Vinegar Dip", price: 195, cal: 700, img: null },
     { id: 402, category: "Ketogenic", name: "Sisig Special", desc: "Pork Sisig (Mask/Belly), Mayo", price: 190, cal: 750, img: null },
     { id: 403, category: "Ketogenic", name: "Beef & Butter", desc: "Beef Salpicao (Garlic Butter)", price: 210, cal: 720, img: null },
@@ -63,9 +63,8 @@ const BuildPlan = () => {
     { id: 407, category: "Ketogenic", name: "Sausage Fest", desc: "Frankfurters, Cheese Sauce", price: 195, cal: 760, img: null },
     { id: 408, category: "Ketogenic", name: "Veggie Fat", desc: "Cauliflower 'Mac' & Cheese", price: 180, cal: 650, img: null },
     { id: 409, category: "Ketogenic", name: "Fried & Crispy", desc: "Crispy Pata Slices, Soy Vinegar", price: 220, cal: 800, img: null },
-    { id: 410, category: "Ketogenic", name: "Avocado & Cream", desc: "Creamy Mushroom Pork Chop", price: 205, cal: 730, img: null },
 
-    // --- 5. VEGETARIAN ---
+    // --- 5. VEGETARIAN (Placeholders) ---
     { id: 501, category: "Vegetarian", name: "Tofu & Beans", desc: "Tokwa't Baboy Style (No Pork)", price: 140, cal: 350, img: null },
     { id: 502, category: "Vegetarian", name: "Egg Classics", desc: "Tortang Talong (Plain)", price: 130, cal: 320, img: null },
     { id: 503, category: "Vegetarian", name: "Mushroom Magic", desc: "Mushroom Burger Steak, Gravy", price: 160, cal: 380, img: null },
@@ -75,9 +74,8 @@ const BuildPlan = () => {
     { id: 507, category: "Vegetarian", name: "Asian Veggie", desc: "Chopsuey (Quail Eggs)", price: 150, cal: 330, img: null },
     { id: 508, category: "Vegetarian", name: "Pumpkin Special", desc: "Ginataang Kalabasa", price: 140, cal: 410, img: null },
     { id: 509, category: "Vegetarian", name: "The Imitation", desc: "Veggie 'Pork' BBQ (Seitan)", price: 170, cal: 360, img: null },
-    { id: 510, category: "Vegetarian", name: "Bean Power", desc: "Three Bean Chili", price: 160, cal: 420, img: null },
 
-    // --- 6. BALANCED ---
+    // --- 6. BALANCED (Placeholders) ---
     { id: 601, category: "Balanced", name: "Best Sellers", desc: "Tapsilog", price: 170, cal: 550, img: null },
     { id: 602, category: "Balanced", name: "Sweet & Savory", desc: "Pinoy Spaghetti", price: 165, cal: 600, img: null },
     { id: 603, category: "Balanced", name: "Fried Favorites", desc: "Fried Chicken, Gravy", price: 175, cal: 650, img: null },
@@ -87,7 +85,6 @@ const BuildPlan = () => {
     { id: 607, category: "Balanced", name: "Fish & Seafood", desc: "Sweet & Sour Fish", price: 185, cal: 530, img: null },
     { id: 608, category: "Balanced", name: "Merienda Dinner", desc: "Burger Steak", price: 175, cal: 610, img: null },
     { id: 609, category: "Balanced", name: "BBQ", desc: "Pork BBQ (2 sticks)", price: 160, cal: 500, img: null },
-    { id: 610, category: "Balanced", name: "Comfort", desc: "Bistek Tagalog", price: 195, cal: 590, img: null },
   ];
 
   const displayedMeals = menuDatabase.filter(meal => meal.category === activeCategory);
@@ -152,7 +149,7 @@ const BuildPlan = () => {
             return (
               <div key={meal.id} className="kiosk-list-item">
                 
-                {/* 3:1 IMAGE (Using Placeholder if img is null) */}
+                {/* 3:1 IMAGE (Fallback to Placeholder if img is null) */}
                 <div className="list-image-container">
                   {meal.img ? (
                     <img src={meal.img} alt={meal.name} />
@@ -206,7 +203,7 @@ const BuildPlan = () => {
         
         <div className="summary-actions">
           <div className="total-price">
-            <small>Total</small>
+            <small>Estimated Total</small>
             <span>₱{totalPrice.toLocaleString()}</span>
           </div>
           <button 

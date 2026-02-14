@@ -11,12 +11,11 @@ import meal6 from '../../assets/Meal (6).jpg';
 import meal7 from '../../assets/Meal (7).jpg';
 import meal8 from '../../assets/Meal (8).jpg';
 import meal9 from '../../assets/Meal (9).jpg';
-import meal10 from '../../assets/Meal (10).jpg';
 
 const Menu = () => {
   const [activeCategory, setActiveCategory] = useState("Calorie-Controlled");
 
-  // DATA: Full Menu List with Nutrition
+  // DATA: Menu List (Exactly 9 items per category)
   const menuData = {
     "Calorie-Controlled": {
       subtitle: "The 'Balik-Alindog' Line - Portion control focus.",
@@ -93,14 +92,6 @@ const Menu = () => {
           l: "Stir-Fried Sayote, Chicken Strips", 
           d: "Lemon Butter Pork Chop, Green Beans",
           nutrition: { cal: "1230", protein: "91g", carbs: "129g", fat: "40g" }
-        },
-        { 
-          title: "Mushroom Lovers", 
-          image: meal10,
-          b: "Mushroom & Spinach Frittata", 
-          l: "Burger Steak, Mushroom Gravy", 
-          d: "Chicken & Mushroom Salpicao",
-          nutrition: { cal: "1210", protein: "93g", carbs: "126g", fat: "39g" }
         }
       ]
     },
@@ -110,6 +101,7 @@ const Menu = () => {
       items: [
         { 
           title: "The Power Silog", 
+          image: meal1, 
           b: "Beef Tapa (Sirloin), Egg, Garlic Adlai", 
           l: "Beef Mechado (Larded Beef)", 
           d: "Grilled Chicken, Hummus, Carrots",
@@ -117,6 +109,7 @@ const Menu = () => {
         },
         { 
           title: "Pork Power", 
+          image: meal2,
           b: "Homemade Pork Tocino, Salted Egg", 
           l: "Pork Menudo (Meat Chunks & Liver)", 
           d: "Lechon Kawali (Oven Crisped)",
@@ -124,6 +117,7 @@ const Menu = () => {
         },
         { 
           title: "Sausage Fest", 
+          image: meal3,
           b: "Chorizo de Cebu (2pcs), Egg, Rice", 
           l: "Callos (Ox Tripe & Chickpeas)", 
           d: "Hungarian Sausage, Mashed Potato",
@@ -131,6 +125,7 @@ const Menu = () => {
         },
         { 
           title: "Chicken Gains", 
+          image: meal4,
           b: "Chicken Longganisa (4pcs)", 
           l: "Chicken Curry (Japanese Roux)", 
           d: "Roasted Lechon Manok, Sarsa",
@@ -138,6 +133,7 @@ const Menu = () => {
         },
         { 
           title: "Fish & Beef", 
+          image: meal5,
           b: "Fried Bangus Belly, Garlic Rice", 
           l: "Salisbury Steak (Double Patty)", 
           d: "Tuna Steak, Soy Onion Glaze",
@@ -145,6 +141,7 @@ const Menu = () => {
         },
         { 
           title: "Asian Muscle", 
+          image: meal6,
           b: "Beef Gyudon, Onions, Egg", 
           l: "Chicken Teriyaki, Broccoli", 
           d: "Spicy Pork Bulgogi",
@@ -152,6 +149,7 @@ const Menu = () => {
         },
         { 
           title: "The Grind", 
+          image: meal7,
           b: "Arroz a la Cubana", 
           l: "Spaghetti with Meat Sauce", 
           d: "Picadillo, Quail Eggs",
@@ -159,6 +157,7 @@ const Menu = () => {
         },
         { 
           title: "Spicy Protein", 
+          image: meal8,
           b: "Spicy Sardines, Egg, Rice", 
           l: "Bicol Express (Pork Shoulder)", 
           d: "Buffalo Chicken Tenders (Baked)",
@@ -166,17 +165,11 @@ const Menu = () => {
         },
         { 
           title: "Adobo Loading", 
+          image: meal9,
           b: "Adobo Flakes (Crispy), Rice, Egg", 
           l: "Pork Belly Adobo, Boiled Egg", 
           d: "Chicken Thigh Adobo, Potatoes",
           nutrition: { cal: "1630", protein: "137g", carbs: "108g", fat: "67g" }
-        },
-        { 
-          title: "Clean Bulk", 
-          b: "Egg White Omelet, Tuna, Spinach", 
-          l: "Roast Beef, Mushroom Gravy", 
-          d: "Lemon Garlic Fish Fillet",
-          nutrition: { cal: "1570", protein: "143g", carbs: "110g", fat: "54g" }
         }
       ]
     },
@@ -186,6 +179,7 @@ const Menu = () => {
       items: [
         { 
           title: "Daily Low Carb", 
+          image: meal1,
           b: "Skinless Longganisa, Egg, Atchara", 
           l: "Pork Chop, Buttered Corn & Carrots", 
           d: "Chicken Adobo, Hard Boiled Egg",
@@ -193,6 +187,7 @@ const Menu = () => {
         },
         { 
           title: "Beef & Broccoli", 
+          image: meal2,
           b: "Beef Tapa, Cauliflower Rice", 
           l: "Beef Stir Fry, Broccoli", 
           d: "Burger Patty, Cheese, Coleslaw",
@@ -200,6 +195,7 @@ const Menu = () => {
         },
         { 
           title: "Fish Day", 
+          image: meal3,
           b: "Tinapa, Salted Egg, Tomato", 
           l: "Fried Tilapia, Green Beans", 
           d: "Steamed Fish, Bok Choy",
@@ -207,6 +203,7 @@ const Menu = () => {
         },
         { 
           title: "Chicken Run", 
+          image: meal4,
           b: "Chicken Tocino, Vinegar, Scramble", 
           l: "Chicken Afritada (No Potato)", 
           d: "Roasted Chicken, Steamed Pumpkin",
@@ -214,6 +211,7 @@ const Menu = () => {
         },
         { 
           title: "Asian Inspired", 
+          image: meal5,
           b: "Egg Foo Young (Gravy)", 
           l: "Chopsuey (Meat Heavy, Quail Eggs)", 
           d: "Thai Basil Minced Pork, Fried Egg",
@@ -221,6 +219,7 @@ const Menu = () => {
         },
         { 
           title: "Wrap-less Wrap", 
+          image: meal6,
           b: "Ham & Cheese Roll-ups", 
           l: "Chicken Shawarma Bowl", 
           d: "Taco Salad Bowl (Beef, Salsa)",
@@ -228,6 +227,7 @@ const Menu = () => {
         },
         { 
           title: "Eggplant Special", 
+          image: meal7,
           b: "Tortang Talong (Stuffed)", 
           l: "Eggplant Parmigiana", 
           d: "Binagoongan Baboy, Grilled Talong",
@@ -235,6 +235,7 @@ const Menu = () => {
         },
         { 
           title: "Noodle Swap", 
+          image: meal8,
           b: "Shirataki Pancit Bihon", 
           l: "Zucchini Lasagna", 
           d: "Pancit Canton (Konjac/Veggie)",
@@ -242,17 +243,11 @@ const Menu = () => {
         },
         { 
           title: "Simple Grill", 
+          image: meal9,
           b: "Bacon & Egg Bites", 
           l: "Grilled Liempo, Steamed Okra", 
           d: "Chicken Inasal, Atchara",
           nutrition: { cal: "1170", protein: "97g", carbs: "24g", fat: "72g" }
-        },
-        { 
-          title: "Seafood Light", 
-          b: "Tuna Omelet, Tomato", 
-          l: "Sweet & Sour Fish (No Breading)", 
-          d: "Shrimp Gambas, Cauliflower Rice",
-          nutrition: { cal: "1080", protein: "91g", carbs: "34g", fat: "58g" }
         }
       ]
     },
@@ -262,6 +257,7 @@ const Menu = () => {
       items: [
         { 
           title: "Pork Belly Feast", 
+          image: meal1,
           b: "Fried Pork Belly Strips, Eggs", 
           l: "Lechon Kawali, Vinegar Dip", 
           d: "Adobo sa Gata (Coconut Oil)",
@@ -269,6 +265,7 @@ const Menu = () => {
         },
         { 
           title: "Sisig Special", 
+          image: meal2,
           b: "Tuna Sisig (Oil), Fried Egg", 
           l: "Pork Sisig (Mask/Belly), Mayo", 
           d: "Chicken Sisig, Chicharon",
@@ -276,6 +273,7 @@ const Menu = () => {
         },
         { 
           title: "Beef & Butter", 
+          image: meal3,
           b: "Corned Beef (High Fat)", 
           l: "Beef Salpicao (Garlic Butter)", 
           d: "Roast Beef, Herb Butter",
@@ -283,6 +281,7 @@ const Menu = () => {
         },
         { 
           title: "Cheesy Days", 
+          image: meal4,
           b: "Chorizo & Cheese Omelet", 
           l: "Cheesy Meatballs (Mozzarella)", 
           d: "Carbonara Chicken (Cream Sauce)",
@@ -290,6 +289,7 @@ const Menu = () => {
         },
         { 
           title: "Seafood Fat", 
+          image: meal5,
           b: "Bangus Belly (Butter Fried)", 
           l: "Salmon Belly, Lemon Butter", 
           d: "Crab Fat (Aligue) Prawns",
@@ -297,6 +297,7 @@ const Menu = () => {
         },
         { 
           title: "Spicy Keto", 
+          image: meal6,
           b: "Spicy Sardines (Olive Oil), Egg", 
           l: "Bicol Express (Pork, Oil-based)", 
           d: "Chili Garlic Pork, Peanuts",
@@ -304,6 +305,7 @@ const Menu = () => {
         },
         { 
           title: "Sausage Fest", 
+          image: meal7,
           b: "Longganisa (Garlic/Batutay)", 
           l: "Hungarian Sausage Slices", 
           d: "Frankfurters, Cheese Sauce",
@@ -311,6 +313,7 @@ const Menu = () => {
         },
         { 
           title: "Veggie Fat", 
+          image: meal8,
           b: "Scrambled Eggs, Pesto, Cheese", 
           l: "Laing (Pork Fat)", 
           d: "Cauliflower 'Mac' & Cheese",
@@ -318,17 +321,11 @@ const Menu = () => {
         },
         { 
           title: "Fried & Crispy", 
+          image: meal9,
           b: "Bacon Strips, Hard Boiled Eggs", 
           l: "Fried Chicken (Almond Flour)", 
           d: "Crispy Pata Slices, Soy Vinegar",
           nutrition: { cal: "1390", protein: "91g", carbs: "11g", fat: "110g" }
-        },
-        { 
-          title: "Avocado & Cream", 
-          b: "Cream Cheese Pancakes", 
-          l: "Pork Menudo (Cheese/Hotdog)", 
-          d: "Creamy Mushroom Pork Chop",
-          nutrition: { cal: "1340", protein: "85g", carbs: "19g", fat: "104g" }
         }
       ]
     },
@@ -338,6 +335,7 @@ const Menu = () => {
       items: [
         { 
           title: "Tofu & Beans", 
+          image: meal1,
           b: "Tofu Scramble, Turmeric", 
           l: "Tokwa't Baboy Style (No Pork)", 
           d: "Monggo Guisado, Malunggay",
@@ -345,6 +343,7 @@ const Menu = () => {
         },
         { 
           title: "Egg Classics", 
+          image: meal2,
           b: "Tortang Talong (Plain)", 
           l: "Egg Curry", 
           d: "Sarciadong Itlog",
@@ -352,6 +351,7 @@ const Menu = () => {
         },
         { 
           title: "Mushroom Magic", 
+          image: meal3,
           b: "Mushroom Risotto", 
           l: "Mushroom Burger Steak, Gravy", 
           d: "Sotanghon Guisado (Mushrooms)",
@@ -359,6 +359,7 @@ const Menu = () => {
         },
         { 
           title: "Pasta & Noodles", 
+          image: meal4,
           b: "Pancit Bihon (Veggie)", 
           l: "Pesto Pasta (Oil-based)", 
           d: "Marinara Pasta, Veggie Balls",
@@ -366,6 +367,7 @@ const Menu = () => {
         },
         { 
           title: "Stews", 
+          image: meal5,
           b: "Champorado (Choco Rice)", 
           l: "Kalderetang Gulay", 
           d: "Menudong Gulay",
@@ -373,6 +375,7 @@ const Menu = () => {
         },
         { 
           title: "Sweet & Sour", 
+          image: meal6,
           b: "Banana Pancakes (Saba)", 
           l: "Sweet & Sour Tofu", 
           d: "Veggie Balls, Sweet Chili",
@@ -380,6 +383,7 @@ const Menu = () => {
         },
         { 
           title: "Asian Veggie", 
+          image: meal7,
           b: "Fried Rice (Corn/Carrots), Egg", 
           l: "Stir-Fry Baguio Beans", 
           d: "Chopsuey (Quail Eggs)",
@@ -387,6 +391,7 @@ const Menu = () => {
         },
         { 
           title: "Pumpkin Special", 
+          image: meal8,
           b: "Squash Fritters (Okoy)", 
           l: "Ginataang Kalabasa", 
           d: "Roasted Pumpkin, Feta",
@@ -394,27 +399,21 @@ const Menu = () => {
         },
         { 
           title: "The Imitation", 
+          image: meal9,
           b: "Veggie Longganisa", 
           l: "Veggie 'Pork' BBQ (Seitan)", 
           d: "Vegetarian Kare-Kare",
           nutrition: { cal: "1185", protein: "74g", carbs: "147g", fat: "37g" }
-        },
-        { 
-          title: "Bean Power", 
-          b: "Beans & Toast", 
-          l: "Three Bean Chili", 
-          d: "Lentil Stew, Potato",
-          nutrition: { cal: "1165", protein: "72g", carbs: "149g", fat: "32g" }
         }
       ]
     },
-    // REMOVED: Heart-Healthy
     "Balanced": {
       subtitle: "The 'Everyday' Line - Filipino favorites.",
       color: "#2c3e50", // Dark Blue
       items: [
         { 
           title: "Best Sellers", 
+          image: meal1,
           b: "Tapsilog", 
           l: "Pork Adobo (Belly)", 
           d: "Beef Caldereta",
@@ -422,6 +421,7 @@ const Menu = () => {
         },
         { 
           title: "Sweet & Savory", 
+          image: meal2,
           b: "Longsilog", 
           l: "Pinoy Spaghetti", 
           d: "Humba (Braised Pork)",
@@ -429,6 +429,7 @@ const Menu = () => {
         },
         { 
           title: "Fried Favorites", 
+          image: meal3,
           b: "Tocilog", 
           l: "Fried Chicken, Gravy", 
           d: "Pork Chop, Ketchup",
@@ -436,6 +437,7 @@ const Menu = () => {
         },
         { 
           title: "Roast Special", 
+          image: meal4,
           b: "Corned Beef, Potatoes", 
           l: "Lechon Paksiw", 
           d: "Roast Chicken, Mang Tomas",
@@ -443,6 +445,7 @@ const Menu = () => {
         },
         { 
           title: "Asian Fusion", 
+          image: meal5,
           b: "Siomai, Garlic Rice", 
           l: "Orange Chicken", 
           d: "Beef Broccoli",
@@ -450,6 +453,7 @@ const Menu = () => {
         },
         { 
           title: "Stews", 
+          image: meal6,
           b: "Hotdog & Egg Stew", 
           l: "Pork Afritada", 
           d: "Menudo",
@@ -457,6 +461,7 @@ const Menu = () => {
         },
         { 
           title: "Fish & Seafood", 
+          image: meal7,
           b: "Daing na Bangus", 
           l: "Fish Fillet Tartar", 
           d: "Sweet & Sour Fish",
@@ -464,6 +469,7 @@ const Menu = () => {
         },
         { 
           title: "Merienda Dinner", 
+          image: meal8,
           b: "Spam Lite, Egg", 
           l: "Pancit Canton", 
           d: "Burger Steak",
@@ -471,17 +477,11 @@ const Menu = () => {
         },
         { 
           title: "BBQ", 
+          image: meal9,
           b: "Skinless Longganisa", 
           l: "Pork BBQ", 
           d: "Chicken BBQ",
           nutrition: { cal: "1505", protein: "101g", carbs: "156g", fat: "50g" }
-        },
-        { 
-          title: "Comfort", 
-          b: "Tortang Talong, Giniling", 
-          l: "Lumpiang Shanghai", 
-          d: "Bistek Tagalog",
-          nutrition: { cal: "1540", protein: "98g", carbs: "161g", fat: "54g" }
         }
       ]
     }
@@ -517,7 +517,7 @@ const Menu = () => {
         {menuData[activeCategory].items.map((item, index) => (
           <div key={index} className="menu-card">
             
-            {/* 1. IMAGE DISPLAY */}
+            {/* 1. IMAGE DISPLAY (WITH FALLBACK) */}
             <div className="meal-image-placeholder">
               {item.image ? (
                 <img src={item.image} alt={item.title} className="meal-img" />
