@@ -1,142 +1,353 @@
+/* CONTAINER & HEADER */
 .orders-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem 20px;
+  padding: 3rem 5%;
   min-height: 80vh;
+  background-color: #f8f9fa;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-/* TABS STYLING */
+.orders-header-content {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.orders-header-content h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+  color: #1a1a1a;
+}
+
+/* --- LEVEL 1 TABS (MAIN) --- */
 .tabs-header {
   display: flex;
-  border-bottom: 1px solid #e0e0e0;
-  margin-bottom: 2rem;
-  background: white;
-  position: sticky;
-  top: 80px; /* Sticks below navbar */
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem; /* Consistent bottom margin */
+  border-bottom: 2px solid #eaeaea;
+  padding-bottom: 0;
 }
 
 .tab-btn {
-  flex: 1;
-  padding: 15px;
   background: none;
   border: none;
-  font-size: 1rem;
-  color: #666;
-  font-weight: 500;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #888;
+  padding: 10px 10px 15px 10px; 
   cursor: pointer;
   position: relative;
   transition: color 0.2s;
 }
 
-.tab-btn:hover {
-  color: var(--primary-black);
-}
-
-/* The "Shopee" Orange Underline effect */
-.tab-btn.active {
-  color: #e67e22; /* Or your brand color */
-  font-weight: 700;
-}
+.tab-btn:hover { color: #555; }
+.tab-btn.active { color: #1a1a1a; }
 
 .tab-btn.active::after {
   content: '';
   position: absolute;
-  bottom: -1px;
+  bottom: -2px;
   left: 0;
   width: 100%;
   height: 3px;
-  background-color: #e67e22;
+  background-color: #1a1a1a;
 }
 
-/* ORDER CARD STYLING */
+/* --- LEVEL 2 TABS (SUB-FILTERS) --- */
+/* UPDATED SPACING HERE */
+.sub-tabs-container {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  
+  /* Pull closer to main tabs to group navigation visually */
+  margin-top: -1rem; 
+  
+  /* Push content down by the same amount as main tabs do */
+  margin-bottom: 2rem;
+  
+  background-color: #e9ecef;
+  padding: 5px;
+  border-radius: 50px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sub-tab-btn {
+  background: transparent;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sub-tab-btn:hover { color: #333; }
+
+.sub-tab-btn.active {
+  background-color: #fff;
+  color: #1a1a1a;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* --- CARD LIST --- */
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* CARD STYLES */
 .order-card {
   background: white;
-  border: 1px solid #eee;
-  border-radius: 8px;
-  margin-bottom: 1.5rem;
+  border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border: 1px solid #eaeaea;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  transition: opacity 0.3s;
 }
 
 .order-header {
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid #f0f0f0;
-  padding-bottom: 10px;
-  margin-bottom: 15px;
-  font-size: 0.9rem;
-  color: #555;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px dashed #eee;
+  padding-bottom: 1rem;
 }
 
+.order-id, .status-text {
+  font-family: monospace;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+/* BADGES */
 .status-badge {
-  text-transform: uppercase;
   font-size: 0.8rem;
   font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
 }
 
-.status-badge.ship { color: #f39c12; }
-.status-badge.receive { color: #3498db; }
-.status-badge.completed { color: #27ae60; }
+.status-badge.active {
+  background-color: #e8f8f0;
+  color: #2ecc71;
+}
+
+/* PILLS (For History) */
+.status-pill {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background-color: #f4f4f4;
+  color: #666;
+  margin-top: 6px;
+}
+
+.status-pill.to-ship { background-color: #fff8e1; color: #f39c12; }
+.status-pill.to-receive { background-color: #e3f2fd; color: #3498db; }
+.status-pill.completed { background-color: #e8f8f0; color: #2ecc71; }
 
 .order-body {
   display: flex;
-  gap: 15px;
+  gap: 1.5rem;
   align-items: center;
+  margin-bottom: 1.5rem;
 }
 
 .order-img {
   width: 70px;
   height: 70px;
-  border-radius: 4px;
+  border-radius: 8px;
   object-fit: cover;
-  background: #eee;
 }
 
-.order-info {
-  flex: 1;
-}
+.order-info { flex: 1; }
 
 .order-info h4 {
-  font-size: 1rem;
-  margin-bottom: 5px;
+  font-size: 1.2rem;
+  margin-bottom: 0.2rem;
+  color: #1a1a1a;
 }
+
+.sub-details p {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 2px 0;
+}
+
+.next-date { color: #2ecc71 !important; }
 
 .order-price {
-  font-size: 1.2rem;
-  font-weight: 700;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  text-align: right;
 }
 
+.order-price small {
+  display: block;
+  font-size: 0.8rem;
+  color: #888;
+  font-weight: 500;
+}
+
+/* FOOTER BUTTONS */
 .order-footer {
   display: flex;
   justify-content: flex-end;
-  margin-top: 15px;
-  padding-top: 15px;
-  border-top: 1px dashed #eee;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #f0f0f0;
 }
 
-.track-btn {
-  padding: 8px 20px;
-  border: 1px solid #ddd;
-  background: white;
-  border-radius: 4px;
+.primary-btn {
+  background-color: #1a1a1a;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
   font-weight: 600;
+  cursor: pointer;
   transition: all 0.2s;
 }
 
-.track-btn:hover {
-  border-color: #e67e22;
-  color: #e67e22;
+.primary-btn:hover { background-color: #333; }
+
+.secondary-btn {
+  background: white;
+  border: 1px solid #ddd;
+  color: #555;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
-/* Empty State */
+.secondary-btn:hover { border-color: #999; background-color: #f9f9f9; }
+
+.danger-btn {
+  background: white;
+  border: 1px solid #ffcccc;
+  color: #e74c3c;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.danger-btn:hover { background-color: #fff5f5; border-color: #e74c3c; }
+
 .empty-state {
   text-align: center;
-  padding: 3rem;
-  color: #999;
+  padding: 4rem;
+  color: #888;
 }
 
 .empty-icon {
   font-size: 3rem;
   margin-bottom: 1rem;
   opacity: 0.5;
+}
+
+/* --- RATING MODAL STYLES --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal-content {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  animation: slideUp 0.3s ease-out;
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #888;
+}
+
+.modal-subtitle {
+  color: #666;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.star-rating {
+  font-size: 2.5rem;
+  color: #ddd;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+}
+
+.star {
+  transition: color 0.2s;
+  padding: 0 5px;
+}
+
+.star.filled { color: #f1c40f; }
+.star:hover { color: #f39c12; }
+
+.rating-comment {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: inherit;
+  margin-bottom: 1.5rem;
+  resize: none;
+}
+
+.submit-rating-btn {
+  width: 100%;
+  padding: 14px;
+  background-color: #1a1a1a;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.submit-rating-btn:hover { background-color: #2ecc71; }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }

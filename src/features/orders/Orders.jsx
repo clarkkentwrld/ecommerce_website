@@ -1,114 +1,210 @@
 import React, { useState } from 'react';
-import './Orders.css'; // We will create this next
+import './Orders.css'; 
 
-const Orders = () => {
-  // 1. State to track which tab is active
-  const [activeTab, setActiveTab] = useState('ship');
+const Orders = ({ subscriptions, pastOrders, cancelSubscription, cancelOrder }) => {
+  const [activeTab, setActiveTab] = useState('subs');
+  const [historyFilter, setHistoryFilter] = useState('to-ship');
 
-  // 2. Mock Data (Simulating a database)
-  const allOrders = [
-    {
-      id: "ORD-7782",
-      status: "ship", // Matches the tab key
-      date: "Feb 12, 2026",
-      total: "$54.99",
-      items: ["Keto Meal Box (5 meals)"],
-      image: "https://placehold.co/100x100?text=Keto"
-    },
-    {
-      id: "ORD-9921",
-      status: "receive",
-      date: "Feb 10, 2026",
-      total: "$32.50",
-      items: ["Protein Supplements", "Shaker Bottle"],
-      image: "https://placehold.co/100x100?text=Supplements"
-    },
-    {
-      id: "ORD-1102",
-      status: "completed",
-      date: "Jan 28, 2026",
-      total: "$89.99",
-      items: ["Chef's Choice (Full Week)"],
-      image: "https://placehold.co/100x100?text=Chef"
-    },
-    {
-      id: "ORD-0092",
-      status: "completed",
-      date: "Jan 15, 2026",
-      total: "$12.99",
-      items: ["Vegan Starter Kit"],
-      image: "https://placehold.co/100x100?text=Vegan"
-    }
-  ];
+  // --- RATING MODAL STATE ---
+  const [isRatingOpen, setIsRatingOpen] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [rating, setRating] = useState(0);
 
-  // 3. Filter orders based on the active tab
-  const displayedOrders = allOrders.filter(order => order.status === activeTab);
+  const openRatingModal = (order) => {
+    setSelectedOrder(order);
+    setRating(0); 
+    setIsRatingOpen(true);
+  };
+
+  const closeRatingModal = () => {
+    setIsRatingOpen(false);
+    setSelectedOrder(null);
+  };
+
+  const handleSubmitRating = () => {
+    alert(`Thank you for rating ${selectedOrder.items[0]} with ${rating} stars!`);
+    closeRatingModal();
+  };
+
+  // Filter Logic
+  const filteredHistory = pastOrders.filter(order => order.status === historyFilter);
 
   return (
     <div className="orders-container">
-      <h1>My Purchases</h1>
+      <div className="orders-header-content">
+        <h1>My Dashboard</h1>
+        <p>Manage your active subscriptions and view order history.</p>
+      </div>
 
-      {/* TABS HEADER */}
+      {/* --- LEVEL 1 TABS --- */}
       <div className="tabs-header">
         <button 
-          className={`tab-btn ${activeTab === 'ship' ? 'active' : ''}`}
-          onClick={() => setActiveTab('ship')}
+          className={`tab-btn ${activeTab === 'subs' ? 'active' : ''}`}
+          onClick={() => setActiveTab('subs')}
         >
-          To Ship
+          My Subscriptions
         </button>
         <button 
-          className={`tab-btn ${activeTab === 'receive' ? 'active' : ''}`}
-          onClick={() => setActiveTab('receive')}
+          className={`tab-btn ${activeTab === 'history' ? 'active' : ''}`}
+          onClick={() => setActiveTab('history')}
         >
-          To Receive
-        </button>
-        <button 
-          className={`tab-btn ${activeTab === 'completed' ? 'active' : ''}`}
-          onClick={() => setActiveTab('completed')}
-        >
-          Completed
+          Order History
         </button>
       </div>
 
-      {/* ORDERS LIST */}
-      <div className="orders-list">
-        {displayedOrders.length > 0 ? (
-          displayedOrders.map((order) => (
-            <div key={order.id} className="order-card">
-              <div className="order-header">
-                <span className="order-id">ID: {order.id}</span>
-                <span className={`status-badge ${order.status}`}>
-                  {order.status === 'ship' ? 'Processing' : 
-                   order.status === 'receive' ? 'Out for Delivery' : 'Delivered'}
-                </span>
-              </div>
-              
-              <div className="order-body">
-                <img src={order.image} alt="Product" className="order-img" />
-                <div className="order-info">
-                  <h4>{order.items[0]} {order.items.length > 1 && `+ ${order.items.length - 1} more`}</h4>
-                  <p>Order Date: {order.date}</p>
-                </div>
-                <div className="order-price">
-                  {order.total}
-                </div>
-              </div>
+      {/* --- LEVEL 2 TABS (MOVED OUTSIDE THE LIST) --- */}
+      {activeTab === 'history' && (
+        <div className="sub-tabs-container">
+          <button 
+            className={`sub-tab-btn ${historyFilter === 'to-ship' ? 'active' : ''}`} 
+            onClick={() => setHistoryFilter('to-ship')}
+          >
+            To Ship
+          </button>
+          <button 
+            className={`sub-tab-btn ${historyFilter === 'to-receive' ? 'active' : ''}`} 
+            onClick={() => setHistoryFilter('to-receive')}
+          >
+            To Receive
+          </button>
+          <button 
+            className={`sub-tab-btn ${historyFilter === 'completed' ? 'active' : ''}`} 
+            onClick={() => setHistoryFilter('completed')}
+          >
+            Completed
+          </button>
+        </div>
+      )}
 
-              <div className="order-footer">
-                <button className="track-btn">
-                  {order.status === 'completed' ? 'Buy Again' : 'Track Order'}
-                </button>
+      {/* --- CONTENT LIST --- */}
+      <div className="orders-list">
+        
+        {/* VIEW 1: SUBSCRIPTIONS */}
+        {activeTab === 'subs' && (
+          subscriptions.length > 0 ? (
+            subscriptions.map((sub) => (
+              <div key={sub.id} className="order-card active-sub">
+                <div className="order-header">
+                  <span className="order-id">ID: {sub.id}</span>
+                  <span className="status-badge active">● Active</span>
+                </div>
+                
+                <div className="order-body">
+                  <img src={sub.image} alt="Plan" className="order-img" />
+                  <div className="order-info">
+                    <h4>{sub.plan}</h4>
+                    <div className="sub-details">
+                      <p><strong>Billing:</strong> {sub.billingCycle}</p>
+                      <p className="next-date"><strong>Next Delivery:</strong> {sub.nextDelivery}</p>
+                    </div>
+                  </div>
+                  <div className="order-price">
+                    {sub.price}<small>/week</small>
+                  </div>
+                </div>
+
+                <div className="order-footer">
+                  <button className="danger-btn" onClick={() => cancelSubscription(sub.id)}>
+                    Cancel Subscription
+                  </button>
+                </div>
               </div>
+            ))
+          ) : (
+            <div className="empty-state">
+              <div className="empty-icon">📅</div>
+              <p>No active subscriptions found.</p>
             </div>
-          ))
-        ) : (
-          /* EMPTY STATE */
-          <div className="empty-state">
-            <div className="empty-icon">📦</div>
-            <p>No orders found in this category.</p>
-          </div>
+          )
+        )}
+
+        {/* VIEW 2: ORDER HISTORY */}
+        {activeTab === 'history' && (
+          filteredHistory.length > 0 ? (
+            filteredHistory.map((order) => (
+              <div key={order.id} className="order-card">
+                <div className="order-header">
+                  <span className="order-id">Order #{order.id}</span>
+                  <span className="status-text">{order.date}</span>
+                </div>
+                
+                <div className="order-body">
+                  <img src={order.image} alt="Order" className="order-img" />
+                  <div className="order-info">
+                    <h4>{order.items[0]}</h4>
+                    <span className={`status-pill ${order.status}`}>
+                      {order.status.replace('-', ' ')}
+                    </span>
+                  </div>
+                  <div className="order-price">
+                    {order.total}
+                  </div>
+                </div>
+
+                <div className="order-footer">
+                  {order.status === 'to-ship' && (
+                    <button className="danger-btn" onClick={() => cancelOrder(order.id)}>
+                      Cancel Order
+                    </button>
+                  )}
+
+                  {order.status === 'to-receive' && (
+                    <button className="secondary-btn">Track Package</button>
+                  )}
+
+                  {order.status === 'completed' && (
+                    <>
+                      <button className="primary-btn" onClick={() => openRatingModal(order)}>
+                        Rate Order
+                      </button>
+                      <button className="secondary-btn">Buy Again</button>
+                    </>
+                  )}
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="empty-state">
+              <div className="empty-icon">📦</div>
+              <p>No orders in "{historyFilter.replace('-', ' ')}".</p>
+            </div>
+          )
         )}
       </div>
+
+      {/* --- RATING MODAL --- */}
+      {isRatingOpen && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <button className="modal-close" onClick={closeRatingModal}>&times;</button>
+            <h2>Rate your Order</h2>
+            <p className="modal-subtitle">{selectedOrder?.items[0]}</p>
+            
+            <div className="star-rating">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <span 
+                  key={star} 
+                  className={`star ${star <= rating ? 'filled' : ''}`}
+                  onClick={() => setRating(star)}
+                >
+                  ★
+                </span>
+              ))}
+            </div>
+
+            <textarea 
+              placeholder="Write a review (optional)..." 
+              className="rating-comment"
+              rows="3"
+            ></textarea>
+
+            <button className="submit-rating-btn" onClick={handleSubmitRating}>
+              Submit Review
+            </button>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };
