@@ -12,18 +12,19 @@ import {
 // --- IMAGES ---
 import heroImage from '../../assets/Meal_Prep.jpg'; 
 import dividerImage from '../../assets/Meal_Prep 2.jpg'; 
-import meal1 from '../../assets/Meal (1).jpg';
-import meal2 from '../../assets/Meal (2).jpg';
-import meal3 from '../../assets/Meal (3).jpg';
-import meal4 from '../../assets/Meal (4).jpg';
-import meal5 from '../../assets/Meal (5).jpg';
+
+// --- UPDATED FAVORITES (Calorie-Controlled 3, 4, 5, 6, 8) ---
+import meal3 from '../../assets/cal (3).jpg';
+import meal4 from '../../assets/cal (4).jpg';
+import meal5 from '../../assets/cal (5).jpg';
+import meal6 from '../../assets/cal (6).jpg';
+import meal8 from '../../assets/cal (8).jpg';
 
 const Home = () => {
-  // Setup Intersection Observer for scroll animation
   const { ref: favoritesRef, inView: favoritesInView } = useInView({
     triggerOnce: true, 
-    threshold: 0.1, // Trigger when 10% is visible
-    rootMargin: '-50px 0px' // Slightly offset trigger point
+    threshold: 0.1, 
+    rootMargin: '-50px 0px' 
   });
 
   return (
@@ -52,7 +53,7 @@ const Home = () => {
         ></div>
       </section>
 
-      {/* 2. FAVORITES SECTION (Pyramid Layout) */}
+      {/* 2. FAVORITES SECTION (Updated Menu Items) */}
       <section 
         className={`section-container favorites-section ${favoritesInView ? 'animate-active' : ''}`}
         ref={favoritesRef}
@@ -65,22 +66,31 @@ const Home = () => {
         {/* PYRAMID WAVE CONTAINER */}
         <div className="favorites-wave-row">
           {[
-            { img: meal1, name: "Chicken Adobo", desc: "with Boiled Egg" },
-            { img: meal2, name: "Chicken Afritada", desc: "with Vegetables" },
-            { img: meal3, name: "Ginisang Munggo", desc: "with Tinapa Flakes" }, // Center Item (Highest)
-            { img: meal4, name: "Roast Chicken", desc: "with Steamed Pumpkin" },
-            { img: meal5, name: "Pork Asado", desc: "with Turmeric Rice" }
+            // Calorie-Controlled #3 (Lunch Label)
+            { img: meal3, label: "Ginisang Munggo, Tinapa Flakes" },
+            // Calorie-Controlled #4 (Lunch Label)
+            { img: meal4, label: "Roast Chicken, Pumpkin Side" },
+            // Calorie-Controlled #5 (Lunch Label)
+            { img: meal5, label: "Pork Asado Slices (Lean)" },
+            // Calorie-Controlled #6 (Lunch Label)
+            { img: meal6, label: "Bicol Express (Lean, No Cream)" },
+            // Calorie-Controlled #8 (Lunch Label)
+            { img: meal8, label: "Beef Giniling with Raisins" }
           ].map((item, index) => (
             <div 
               key={index} 
               className="wave-card"
-              style={{ transitionDelay: `${index * 150}ms` }} // Inline staggered delay
+              style={{ transitionDelay: `${index * 150}ms` }} 
             >
               <div className="wave-img-circle">
-                <img src={item.img} alt={item.name} />
+                <img 
+                  src={item.img} 
+                  alt={item.label} 
+                  // ADDED ZOOM HERE
+                  style={{ transform: 'scale(1.15)', width: '100%', height: '100%', objectFit: 'cover' }}
+                />
               </div>
-              <h4>{item.name}</h4>
-              <span className="fav-desc">{item.desc}</span>
+              <h4>{item.label}</h4>
             </div>
           ))}
         </div>

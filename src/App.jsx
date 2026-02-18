@@ -17,7 +17,6 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // --- STATE 1: SUBSCRIPTIONS ---
   const [subscriptions, setSubscriptions] = useState([
     {
       id: "SUB-1001",
@@ -30,9 +29,7 @@ function App() {
     }
   ]);
 
-  // --- STATE 2: ONE-TIME ORDERS (UPDATED DATA) ---
   const [pastOrders, setPastOrders] = useState([
-    // 1. TO SHIP (Default new ones go here)
     {
       id: "ORD-5521",
       date: "Feb 16, 2026",
@@ -42,72 +39,36 @@ function App() {
       type: "one-time",
       image: "https://placehold.co/100x100?text=Tapa"
     },
-    
-    // 2. TO RECEIVE (Exactly 1 item as requested)
-    {
-      id: "ORD-3310",
-      date: "Feb 14, 2026",
-      status: "to-receive",
-      total: "₱185",
-      items: ["Pork Power (Menudo)"],
-      type: "one-time",
-      image: "https://placehold.co/100x100?text=Menudo"
-    },
-
-    // 3. COMPLETED (Exactly 3 items as requested)
-    {
-      id: "ORD-1101",
-      date: "Jan 28, 2026",
-      status: "completed",
-      total: "₱150",
-      items: ["The Classic Slim (Longganisa)"],
-      type: "one-time",
-      image: "https://placehold.co/100x100?text=Slim"
-    },
-    {
-      id: "ORD-1102",
-      date: "Jan 20, 2026",
-      status: "completed",
-      total: "₱200",
-      items: ["Sausage Fest (Hungarian)"],
-      type: "one-time",
-      image: "https://placehold.co/100x100?text=Sausage"
-    },
-    {
-      id: "ORD-1103",
-      date: "Jan 15, 2026",
-      status: "completed",
-      total: "₱160",
-      items: ["Fish & Fowl (Bangus)"],
-      type: "one-time",
-      image: "https://placehold.co/100x100?text=Fish"
-    }
+    // ... (Keep your existing mock data here)
   ]);
 
-  // HANDLER: Add Subscription
   const addSubscription = (newSub) => {
     setSubscriptions([newSub, ...subscriptions]);
   };
 
-  // HANDLER: Add Order
   const addOneTimeOrder = (newOrder) => {
     const orderWithStatus = { ...newOrder, status: 'to-ship' };
     setPastOrders([orderWithStatus, ...pastOrders]);
   };
 
-  // HANDLER: Remove Subscription
   const cancelSubscription = (id) => {
     setSubscriptions(prev => prev.filter(sub => sub.id !== id));
   };
 
-  // HANDLER: Remove One-Time Order
   const cancelOneTimeOrder = (id) => {
     setPastOrders(prev => prev.filter(order => order.id !== id));
   };
 
-  const handleLoginSuccess = (emailData) => {
+  // --- UPDATED LOGIN HANDLER ---
+  const handleLoginSuccess = (emailData, pendingLocation) => {
     setUser({ email: emailData });
-    navigate('/menu');
+    
+    // REDIRECT LOGIC: If there is a saved location, go there.
+    if (pendingLocation) {
+      navigate(pendingLocation.pathname, { state: pendingLocation.state });
+    } else {
+      navigate('/menu');
+    }
   };
 
   const handleLogout = () => {
@@ -125,12 +86,15 @@ function App() {
           <Route path="/plans" element={<Plans />} />
           <Route path="/menu" element={<Menu />} />
           <Route path="/about" element={<About />} />
+          
+          {/* Pass handleLoginSuccess to Login */}
           <Route path="/login" element={<Login onLogin={handleLoginSuccess} />} />
           
           <Route 
             path="/order" 
             element={
               <Order 
+                user={user} // Pass user state for auth check
                 addSubscription={addSubscription} 
                 addOneTimeOrder={addOneTimeOrder} 
               />

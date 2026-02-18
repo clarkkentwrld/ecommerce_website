@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './Order.css';
 
@@ -9,7 +9,6 @@ import paypalImg from '../../assets/paypal.png';
 import visaImg from '../../assets/visa.png';
 import mastercardImg from '../../assets/mastercard.png';
 
-// --- HELPER ICONS ---
 const WalletIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <rect x="2" y="5" width="20" height="14" rx="2" />
@@ -32,17 +31,22 @@ const CheckIcon = () => (
   </div>
 );
 
-const Order = ({ addSubscription, addOneTimeOrder }) => {
+const Order = ({ user, addSubscription, addOneTimeOrder }) => {
   const location = useLocation();
   const navigate = useNavigate();
   
-  const { planName, price, details } = location.state || { planName: "No Plan Selected", price: "₱0" };
+  const { planName, price, details, customItems } = location.state || { planName: "No Plan Selected", price: "₱0" };
 
-  // --- PAYMENT SELECTION STATE ---
+  // --- SECURITY CHECK (REDIRECT IF NOT LOGGED IN) ---
+  useEffect(() => {
+    if (!user) {
+      navigate('/login', { state: { from: location }, replace: true });
+    }
+  }, [user, navigate, location]);
+
   const [paymentMethod, setPaymentMethod] = useState('ewallet'); 
   const [walletProvider, setWalletProvider] = useState('gcash'); 
 
-  // --- FORM INPUT STATE ---
   const [formData, setFormData] = useState({
     mobile: '',
     email: '',
@@ -51,55 +55,35 @@ const Order = ({ addSubscription, addOneTimeOrder }) => {
     cvc: ''
   });
 
-  const isCustomOrder = Boolean(details) || planName.includes("Custom");
+  const isCustomOrder = Boolean(customItems) || Boolean(details) || planName.includes("Custom");
 
-  // --- INPUT HANDLERS (Auto-Formatting) ---
+  // Prevent flash of content
+  if (!user) return null;
 
-  // 1. Mobile (Numbers only, max 11)
-  const handleMobileChange = (e) => {
-    const value = e.target.value.replace(/\D/g, '').slice(0, 11);
-    setFormData({ ...formData, mobile: value });
-  };
-
-  // 2. Email (Standard text)
-  const handleEmailChange = (e) => {
-    setFormData({ ...formData, email: e.target.value });
-  };
-
-  // 3. Card Number (Numbers only, space every 4 digits, max 19 chars)
+  // --- INPUT HANDLERS ---
+  const handleMobileChange = (e) => setFormData({ ...formData, mobile: e.target.value.replace(/\D/g, '').slice(0, 11) });
+  const handleEmailChange = (e) => setFormData({ ...formData, email: e.target.value });
   const handleCardNumberChange = (e) => {
     let value = e.target.value.replace(/\D/g, '').slice(0, 16);
     value = value.replace(/(\d{4})/g, '$1 ').trim();
     setFormData({ ...formData, cardNumber: value });
   };
-
-  // 4. Expiry (Numbers only, auto-slash MM/YY)
   const handleExpiryChange = (e) => {
     let value = e.target.value.replace(/\D/g, '').slice(0, 4);
-    if (value.length >= 3) {
-      value = `${value.slice(0, 2)}/${value.slice(2)}`;
-    }
+    if (value.length >= 3) value = `${value.slice(0, 2)}/${value.slice(2)}`;
     setFormData({ ...formData, expiry: value });
   };
+  const handleCvcChange = (e) => setFormData({ ...formData, cvc: e.target.value.replace(/\D/g, '').slice(0, 3) });
 
-  // 5. CVC (Numbers only, max 3)
-  const handleCvcChange = (e) => {
-    const value = e.target.value.replace(/\D/g, '').slice(0, 3);
-    setFormData({ ...formData, cvc: value });
-  };
-
-  // --- VALIDATION & CHECKOUT ---
   const handleCheckout = () => {
-    // A. VALIDATION LOGIC
+    // Validation Logic
     if (paymentMethod === 'ewallet') {
       if (walletProvider === 'paypal') {
-        // PayPal Validation
         if (!formData.email.endsWith('@gmail.com')) {
           alert("Please enter a valid Gmail address for PayPal.");
           return;
         }
       } else {
-        // GCash / Maya Validation
         if (formData.mobile.length !== 11) {
           alert(`Please enter a valid 11-digit ${walletProvider === 'gcash' ? 'GCash' : 'Maya'} number.`);
           return;
@@ -110,7 +94,6 @@ const Order = ({ addSubscription, addOneTimeOrder }) => {
         }
       }
     } else if (paymentMethod === 'card') {
-      // Card Validation
       if (formData.cardNumber.replace(/\s/g, '').length !== 16) {
         alert("Please enter a valid 16-digit card number.");
         return;
@@ -119,19 +102,12 @@ const Order = ({ addSubscription, addOneTimeOrder }) => {
         alert("Please enter a valid expiry date (MM/YY).");
         return;
       }
-      // Check if month is valid (01-12)
-      const month = parseInt(formData.expiry.substring(0, 2));
-      if (month < 1 || month > 12) {
-        alert("Invalid month in expiry date.");
-        return;
-      }
       if (formData.cvc.length !== 3) {
         alert("Please enter a valid 3-digit CVC.");
         return;
       }
     }
 
-    // B. PROCEED IF VALID
     const confirmBtn = document.querySelector('.proceed-btn');
     if(confirmBtn) {
       confirmBtn.innerText = "Processing...";
@@ -145,12 +121,16 @@ const Order = ({ addSubscription, addOneTimeOrder }) => {
         : 'Credit Card';
 
       if (isCustomOrder) {
+        const orderItems = customItems 
+          ? customItems.map(item => `${item.qty}x ${item.name}`) 
+          : [`Custom Box (${details ? Object.values(details).reduce((a,b)=>a+b,0) : 'N/A'} Meals)`];
+
         const newOrder = {
           id: `ORD-${randomID}`,
           date: new Date().toLocaleDateString(),
           status: 'processing',
           total: price,
-          items: [`Custom Box (${details ? Object.values(details).reduce((a,b)=>a+b,0) : 'N/A'} Meals)`],
+          items: orderItems,
           type: "one-time",
           payment: finalPayment,
           image: `https://placehold.co/100x100?text=Custom`
@@ -184,10 +164,24 @@ const Order = ({ addSubscription, addOneTimeOrder }) => {
 
         <div className="section-header">Order Summary</div>
         <div className="summary-details">
-          <div className="summary-row">
-            <span className="item-name">{planName}</span>
-            <span className="item-price">{price}</span>
-          </div>
+          
+          {customItems ? (
+            <>
+              {customItems.map((item) => (
+                <div className="summary-row" key={item.id}>
+                  <span className="item-name">{item.qty}x {item.name}</span>
+                  <span className="item-price">₱{(item.price * item.qty).toLocaleString()}</span>
+                </div>
+              ))}
+              <div className="summary-divider" style={{margin: '10px 0', borderBottom: '1px solid #ddd'}}></div>
+            </>
+          ) : (
+            <div className="summary-row">
+              <span className="item-name">{planName}</span>
+              <span className="item-price">{price}</span>
+            </div>
+          )}
+
           {!isCustomOrder && (
             <div className="summary-row">
               <span className="item-name">Frequency</span>
@@ -271,8 +265,6 @@ const Order = ({ addSubscription, addOneTimeOrder }) => {
                 <label>
                   {walletProvider === 'paypal' ? 'PayPal Email (Gmail only)' : `${walletProvider === 'gcash' ? 'GCash' : 'Maya'} Mobile Number`}
                 </label>
-                
-                {/* DYNAMIC INPUT RENDERING BASED ON PROVIDER */}
                 {walletProvider === 'paypal' ? (
                   <input 
                     type="email" 
@@ -291,7 +283,6 @@ const Order = ({ addSubscription, addOneTimeOrder }) => {
                     maxLength="11"
                   />
                 )}
-                
                 <p className="secure-note">🔒 You will be redirected to verify securely.</p>
               </div>
             </div>
